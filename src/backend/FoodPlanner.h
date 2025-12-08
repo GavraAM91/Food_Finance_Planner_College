@@ -1,0 +1,73 @@
+#ifndef FOODPLANNER_H
+#define FOODPLANNER_H
+#define _HAS_STD_BYTE 0
+
+// deklrasi variabel
+#include <string>            // untuk operasi string
+#include <vector>            // untuk array dinamis
+#include <fstream>           // untuk operasi file
+#include <iostream>          // untuk cin cout d.l.l
+#include <curl/curl.h>       // untuk menangkap api
+#include <nlohmann/json.hpp> // untuk json
+#include "ConnectionAPI.h"
+#include <ctime> // untuk menggunakan library waktu
+
+using json = nlohmann::json;
+using std::string;
+using namespace std::chrono;
+
+// digunakan untuk menyimpan data makanan dari API
+
+// menyimpan data dari JSON
+struct PrediksiDataKeuangan
+{
+    string status;
+    string message;
+
+    double total_budget = 0;
+    double budget_harian = 0;
+    double uang_disimpan = 0;
+    string saving_rate;
+};
+
+// digunakan untuk menyimpan menu makanan
+struct PrediksiMenu
+{
+    int id_makanan;
+    int harga;
+    int nomor_kantin;
+    string pemilik_kantin;
+    string nama_makanan;
+    string tipe_makanan;
+};
+
+class FoodPlanning
+{
+private:
+    PrediksiMenu pm;
+    PrediksiDataKeuangan pk;
+    vector<PrediksiMenu> daftarMenu;
+
+public:
+    ConnectionAPI api;
+    string response;
+
+    // untuk menyimpan pengeluaran harian
+    void dailyExpenses(long long totalPengeluaran, string tanggal, string deskripsiPengeluaran);
+
+    // mengambil dan menapilkan data planner yang tersimpan di txt
+    void getSavedPlanner(string day, string month, string year);
+
+    // untuk mengambil food planner
+    void getFoodPlanner(string &response);
+
+    void savePlanner(); // untuk menyimpan dalam bentuk file txt
+
+    // request user untuk membuat planner
+    json createPlanner(int id_mahasiswa, string namaMahasiswa, double total_budget, int metode,
+                       double sisa_uang, string jenisMakanan, string tipeMakanan, string tipeMinuman);
+
+    static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp);
+    bool performCurlRequest(const string &url, string &response);
+};
+#endif

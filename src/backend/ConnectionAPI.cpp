@@ -1,4 +1,8 @@
 // Deklrasi library yang akan digunakan
+#define _HAS_STD_BYTE 0
+#define NOMINMAX
+#include <windows.h>
+
 #include "ConnectionAPI.h"
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
@@ -6,7 +10,7 @@
 // fungsi untuk menggunakan API
 
 // menangkap request dari curl
-size_t ConnectionAPI::WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
+size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
 {
     ((string *)userp)->append((char *)contents, size * nmemb);
     return size * nmemb;
@@ -20,9 +24,10 @@ bool ConnectionAPI::performCurlRequest(const string &url, string &response)
     {
         return false;
     }
+    
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, response); // menangkap respon
 
     CURLcode res = curl_easy_perform(curl);
     curl_easy_cleanup(curl);
@@ -60,7 +65,7 @@ bool ConnectionAPI::postJSON(string &jsonData, string *response)
 
     // Callback untuk membaca response
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, response);
 
     CURLcode res = curl_easy_perform(curl);
 

@@ -1,20 +1,9 @@
-#define _HAS_STD_BYTE 0
-#ifndef NOMINMAX
-#define NOMINMAX
-#endif
-
-#include <windows.h>
-
-#include "backend/ConnectionAPI.h"
-#include "backend/FoodPlanner.h"
+// deklarasi library
 #include "FoodPlanningForm.h"
+#include "MainPage.h"
 
-using namespace std;
-
-// PERBAIKAN DI SINI: ganti 'Main' jadi 'main'
-int main()
+void MainPage()
 {
-    system("clear");
     FoodPlanningForm FP;
     int opsiUser;
 
@@ -26,10 +15,10 @@ int main()
         cout << "2. Lihat pengeluaran hari ini" << endl;
         cout << "3. Lihat planning minggu ini" << endl;
         cout << "4. Buat Planning minggu ini" << endl;
-        cout << "5. Keluar" << endl;
-        cout << "-------------------------" << endl;
+        cout << "5. History Planning " << endl;
+        cout << "6. Keluar" << endl;
 
-        cout << " Input Opsi (1 - 5): ";
+        cout << " Input Opsi (1 - 6): ";
         cin >> opsiUser;
 
         switch (opsiUser)
@@ -67,9 +56,7 @@ int main()
             break;
 
         case 5:
-            return 0; // Tambahkan return 0 untuk keluar dengan bersih
+            return;
         }
     }
-
-    return 0;
 }

@@ -1,84 +1,100 @@
-// DIGUNAKAN HANYA UNTUK TESTING !
-// TESTING APAKAH LIBRARY CURL DAN JSON SUDAH AKTIF!
-// DAN UNTUK PEMBELAJARAN SAJA! TIDAK DIPAKAI PADA KODE UTAMA!
-// PERLU SET UP LEBIH LANJUT!
-
+#include <windows.h>
+#include <winhttp.h>
 #include <iostream>
 #include <string>
-#include <curl/curl.h>
-#include <nlohmann/json.hpp>
+#include <nlohman/json.hpp>
+
+#pragma comment(lib, "winhttp.lib")
 
 using json = nlohmann::json;
 using namespace std;
 
-// Callback function untuk CURL
-size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
+string httpGet(const wstring &domain, const wstring &path)
 {
-    size_t totalSize = size * nmemb;
-    ((string *)userp)->append((char *)contents, totalSize);
-    return totalSize;
-}
+    HINTERNET hSession = WinHttpOpen(L"WinHTTP Get Client/1.0",
+                                     WINHTTP_ACCESS_TYPE_DEFAULT_PROXY,
+                                     WINHTTP_NO_PROXY_NAME,
+                                     WINHTTP_NO_PROXY_BYPASS, 0);
 
-// GET request
-bool performCurlRequest(const string &url, string &response)
-{
-    CURL *curl = curl_easy_init();
-    if (!curl)
+    if (!hSession)
+        return "Failed to open session";
+
+    HINTERNET hConnect = WinHttpConnect(hSession, domain.c_str(), INTERNET_DEFAULT_HTTPS_PORT, 0);
+    if (!hConnect)
+        return "Failed to connect";
+
+    HINTERNET hRequest = WinHttpOpenRequest(
+        hConnect, L"GET", path.c_str(),
+        NULL, WINHTTP_NO_REFERER,
+        WINHTTP_DEFAULT_ACCEPT_TYPES,
+        WINHTTP_FLAG_SECURE);
+
+    if (!hRequest)
+        return "Failed to open request";
+
+    BOOL sent = WinHttpSendRequest(hRequest,
+                                   WINHTTP_NO_ADDITIONAL_HEADERS,
+                                   0,
+                                   WINHTTP_NO_REQUEST_DATA,
+                                   0,
+                                   0,
+                                   0);
+
+    if (!sent)
+        return "Failed to send";
+
+    WinHttpReceiveResponse(hRequest, NULL);
+
+    DWORD dwSize = 0;
+    string response;
+
+    do
     {
-        cerr << "Failed to initialize CURL" << endl;
-        return false;
-    }
+        WinHttpQueryDataAvailable(hRequest, &dwSize);
+        if (dwSize == 0)
+            break;
 
-    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+        char *buffer = new char[dwSize + 1];
+        ZeroMemory(buffer, dwSize + 1);
 
-    CURLcode res = curl_easy_perform(curl);
-    curl_easy_cleanup(curl);
+        DWORD bytesRead = 0;
+        WinHttpReadData(hRequest, buffer, dwSize, &bytesRead);
 
-    if (res != CURLE_OK)
-    {
-        cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << endl;
-        return false;
-    }
+        response.append(buffer, bytesRead);
+        delete[] buffer;
 
-    return true;
+    } while (dwSize > 0);
+
+    WinHttpCloseHandle(hRequest);
+    WinHttpCloseHandle(hConnect);
+    WinHttpCloseHandle(hSession);
+
+    return response;
 }
 
 int main()
 {
-    curl_global_init(CURL_GLOBAL_DEFAULT);
 
-    string api_url =
-        "https://api.open-meteo.com/v1/forecast?latitude=-7.25&longitude=112.75&current_weather=true";
+    string resp = httpGet(
+        L"api.open-meteo.com",
+        L"/v1/forecast?latitude=-7.25&longitude=112.75&current_weather=true");
 
-    string response;
+    cout << "RAW RESPONSE:\n"
+         << resp << "\n\n";
 
-    if (performCurlRequest(api_url, response))
+    try
     {
-        cout << "=== Raw JSON ===\n"
-             << response << "\n\n";
+        auto jsonResp = json::parse(resp);
 
-        try
-        {
-            json root = json::parse(response);
-
-            if (root.contains("current_weather"))
-            {
-                auto w = root["current_weather"];
-
-                cout << "=== CURRENT WEATHER ===\n";
-                cout << "Temperature : " << w["temperature"] << " °C\n";
-                cout << "Windspeed   : " << w["windspeed"] << " km/h\n";
-                cout << "Weathercode : " << w["weathercode"] << "\n";
-            }
-        }
-        catch (const json::parse_error &e)
-        {
-            cerr << "JSON Parse Error: " << e.what() << endl;
-        }
+        cout << "CUACA SAAT INI (Surabaya):\n";
+        cout << "Temperature : " << jsonResp["current_weather"]["temperature"] << "°C\n";
+        cout << "Wind Speed  : " << jsonResp["current_weather"]["windspeed"] << " km/h\n";
+        cout << "Time        : " << jsonResp["current_weather"]["time"] << "\n";
+    }
+    catch (...)
+    {
+        cout << "Failed to parse JSON.\n";
     }
 
-    curl_global_cleanup();
     return 0;
 }
