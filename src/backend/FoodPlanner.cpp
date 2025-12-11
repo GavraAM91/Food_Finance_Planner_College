@@ -28,11 +28,15 @@ void FoodPlanning::dailyExpenses(long long totalPengeluaran, string tanggal, str
     bool status = false; // digunakan untuk status apakah berhasil atau tidak, default false
 
     // open file
-    ofstream MyFile("DataFoodPlannerMahasiswa.txt");
+    // ofstream MyFile("DataFoodPlannerMahasiswa.txt");
+
+    // open file atau create file
+    ofstream MyFile(pathPlanner);
 
     // error handling
     if (!MyFile)
     {
+
         cout << "File tidak ditemukan!" << endl;
         return;
     }
@@ -79,12 +83,11 @@ void FoodPlanning::getSavedPlanner(string day, string month, string year)
     // string cariTanggalByUser = day + "-" + month + "-" + year + ".txt";
     // string namaFileTanggal = namaFile + cariTanggalByUser;
 
-    // hasil penyimpanan hanya dalam satu file saja
-    string namaFile = "DataFoodPlannerMahasiswa.txt";
-
     // buka file
     // ifstream MyFile(namaFileTanggal); // digunakan untuk yang function atas
-    ifstream MyFile(namaFile);
+
+    // membuka file dari path yang sudha ditentukan
+    ifstream MyFile(pathPlanner);
 
     if (!MyFile)
     {
@@ -138,7 +141,7 @@ json FoodPlanning::createPlanner(int id_mahasiswa, string namaMahasiswa, double 
     json dataJSON;
 
     // set data untuk json
-    dataJSON["id_mahasiswa"] = id_mahasiswa;
+    // dataJSON["id_mahasiswa"] = id_mahasiswa;
     dataJSON["nama_mahasiswa"] = namaMahasiswa;
     dataJSON["total_budget"] = total_budget;
     dataJSON["metode"] = metode;
@@ -214,14 +217,11 @@ void FoodPlanning::getFoodPlanner(string &response)
 // method untuk simpan data ke .txt
 void FoodPlanning::savePlanner()
 {
-    // digunakana untuk sttus program
-    // bool statusProgram = false;
-
     // digunakan untuk iterasi
     int i = 0;
 
     // buka file
-    ofstream MyFile("DataFoodPlannerMahasiswa.txt");
+    ofstream MyFile(pathPlanner);
 
     // handler error
     if (!MyFile)

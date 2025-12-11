@@ -16,8 +16,6 @@ using json = nlohmann::json;
 using std::string;
 using namespace std::chrono;
 
-// digunakan untuk menyimpan data makanan dari API
-
 // menyimpan data dari JSON
 struct PrediksiDataKeuangan
 {
@@ -51,6 +49,10 @@ private:
 public:
     ConnectionAPI api;
     string response;
+
+    // variabel untuk menyimpan path folder yang digunakan
+    string pathPlanner = "D:/Coding/UNESA/Project/Food-Finance-Planner/dataFile/Planner/DataFoodPlannerMahasiswa.txt"; // path planner
+    string pathExpenses = "D:/Coding/UNESA/Project/Food-Finance-Planner/dataFile/Expenses/DailyExpenses.txt"; // path expenses
 
     // untuk menyimpan pengeluaran harian
     void dailyExpenses(long long totalPengeluaran, string tanggal, string deskripsiPengeluaran);
