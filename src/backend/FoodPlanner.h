@@ -52,10 +52,13 @@ public:
 
     // variabel untuk menyimpan path folder yang digunakan
     string pathPlanner = "D:/Coding/UNESA/Project/Food-Finance-Planner/dataFile/Planner/DataFoodPlannerMahasiswa.txt"; // path planner
-    string pathExpenses = "D:/Coding/UNESA/Project/Food-Finance-Planner/dataFile/Expenses/DailyExpenses.txt"; // path expenses
+    string pathExpenses = "D:/Coding/UNESA/Project/Food-Finance-Planner/dataFile/Expenses/DailyExpenses.txt";          // path expenses
 
+    // untuk menggunakan tanggal 
+    string getDay();
+    
     // untuk menyimpan pengeluaran harian
-    void dailyExpenses(long long totalPengeluaran, string tanggal, string deskripsiPengeluaran);
+    void dailyExpenses(long long totalPengeluaran, string deskripsiPengeluaran);
 
     // mengambil dan menapilkan data planner yang tersimpan di txt
     void getSavedPlanner(string day, string month, string year);

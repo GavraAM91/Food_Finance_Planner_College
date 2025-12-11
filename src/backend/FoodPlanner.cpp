@@ -6,7 +6,7 @@
 #include "FoodPlanner.h"
 
 // method yang digunakan untuk mengakses tanggal =
-string getDay()
+string FoodPlanning::getDay()
 {
     time_t now = time(0);
     tm *ltm = localtime(&now);
@@ -21,7 +21,7 @@ string getDay()
 }
 
 // method untuk menyimpan pengeluaran haria
-void FoodPlanning::dailyExpenses(long long totalPengeluaran, string tanggal, string deskripsiPengeluaran)
+void FoodPlanning::dailyExpenses(long long totalPengeluaran, string deskripsiPengeluaran)
 {
     // deklarasi variabel
     string text;

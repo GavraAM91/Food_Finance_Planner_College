@@ -5,20 +5,21 @@
 
 #include "FoodPlanningForm.h" // header food planning form
 
+// ===== DI KOMEN KARENA SUDAH AADA DI FOODPLANNING.CPP ====
 // function untuk mendapatkan data tanggal
-string getDay()
-{
-    time_t now = time(0);
-    tm *ltm = localtime(&now);
+// string getDay()
+// {
+//     time_t now = time(0);
+//     tm *ltm = localtime(&now);
 
-    // variabel untuk menampung hasil
-    char buffer[80];
+//     // variabel untuk menampung hasil
+//     char buffer[80];
 
-    // panggil fungsi bawaan ctime
-    strftime(buffer, 801., "%d-%m-%Y", ltm);
+//     // panggil fungsi bawaan ctime
+//     strftime(buffer, 801., "%d-%m-%Y", ltm);
 
-    return string(buffer);
-}
+//     return string(buffer);
+// }
 
 // Method untuk membuat planner
 void FoodPlanningForm::makePlanner()
@@ -224,7 +225,7 @@ void FoodPlanningForm::makePlanner()
 // }
 
 // method untuk melihat planner yang sudah dibuat untuk minggu ini
-string FoodPlanningForm::getPlannerAWeek()
+void FoodPlanningForm::getPlannerAWeek()
 {
     // deklarasi variabel yang diperlukan
     string day, month, year;
@@ -243,7 +244,7 @@ string FoodPlanningForm::getPlannerAWeek()
     // masukkan ke dalam function getsavedplanner
     fp.getSavedPlanner(day, month, year);
 
-    cout << "Kembali ke program awal " << endl;
+    // return
 }
 
 // method untuk melihat pengeluaran harian
@@ -287,8 +288,11 @@ string FoodPlanningForm::readDailyExpenses()
 string FoodPlanningForm::createDailyExpenses(int jumlahPengeluaran,
                                              double totalUangYangDikeluarkanHariIni)
 {
+    // deklarasikan foodplanner
+    FoodPlanning fp;
+
     // variabel untuk menyimpan data tanggal
-    string tanggal = getDay();
+    string tanggal = fp.getDay();
 
     ofstream file("DailyExpenses.txt", ios::app);
 

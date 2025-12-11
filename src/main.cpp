@@ -11,10 +11,9 @@
 
 using namespace std;
 
-// PERBAIKAN DI SINI: ganti 'Main' jadi 'main'
 int main()
 {
-    system("clear");
+    system("cls");
     FoodPlanningForm FP;
     int opsiUser;
 
@@ -34,6 +33,7 @@ int main()
 
         switch (opsiUser)
         {
+        // digunakna untuk membuat pengeluaran hari ini
         case 1:
         {
             int jumlah;
@@ -57,7 +57,7 @@ int main()
             break;
 
         case 3:
-            cout << FP.readPlanner();
+            FP.getPlannerAWeek();
             system("pause");
             break;
 
@@ -67,7 +67,7 @@ int main()
             break;
 
         case 5:
-            return 0; // Tambahkan return 0 untuk keluar dengan bersih
+            return 0;
         }
     }
 
