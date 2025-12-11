@@ -50,15 +50,9 @@ void FoodPlanningForm::makePlanner()
         cout << "      FORM PERENCANAAN MAKAN MAHASISWA" << endl;
         cout << "=============================================" << endl;
 
-        // ambil input id mahasiswa
-        cout << left << setw(28) << "Masuukkan Id Mahasiswa : ";
-        cin >> id_mahasiswa;
-        cin.ignore();
-
         // input nama mahasiswa
         cout << left << setw(28) << "Masukkan nama Mahasiswa : ";
         getline(cin, namaMahasiswa);
-        cin.ignore();
 
         // masukkan total budget
         cout << left << setw(28) << " Masukkan Total Budget : ";
@@ -114,7 +108,6 @@ void FoodPlanningForm::makePlanner()
         getline(cin, tipeMinuman);
 
         json result = planner.createPlanner(
-            id_mahasiswa,
             namaMahasiswa,
             total_budget,
             metode,

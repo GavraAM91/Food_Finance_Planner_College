@@ -54,9 +54,9 @@ public:
     string pathPlanner = "D:/Coding/UNESA/Project/Food-Finance-Planner/dataFile/Planner/DataFoodPlannerMahasiswa.txt"; // path planner
     string pathExpenses = "D:/Coding/UNESA/Project/Food-Finance-Planner/dataFile/Expenses/DailyExpenses.txt";          // path expenses
 
-    // untuk menggunakan tanggal 
+    // untuk menggunakan tanggal
     string getDay();
-    
+
     // untuk menyimpan pengeluaran harian
     void dailyExpenses(long long totalPengeluaran, string deskripsiPengeluaran);
 
@@ -69,7 +69,7 @@ public:
     void savePlanner(); // untuk menyimpan dalam bentuk file txt
 
     // request user untuk membuat planner
-    json createPlanner(int id_mahasiswa, string namaMahasiswa, double total_budget, int metode,
+    json createPlanner(string namaMahasiswa, double total_budget, int metode,
                        double sisa_uang, string jenisMakanan, string tipeMakanan, string tipeMinuman);
 
     static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp);

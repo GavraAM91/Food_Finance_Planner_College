@@ -30,6 +30,7 @@ int main()
 
         cout << " Input Opsi (1 - 5): ";
         cin >> opsiUser;
+        cin.ignore();
 
         switch (opsiUser)
         {
@@ -64,6 +65,7 @@ int main()
         case 4:
             FP.makePlanner();
             system("pause");
+
             break;
 
         case 5:

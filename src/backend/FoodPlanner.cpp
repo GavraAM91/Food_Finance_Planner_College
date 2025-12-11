@@ -136,7 +136,7 @@ void FoodPlanning::getSavedPlanner(string day, string month, string year)
 }
 
 // method berisi data untuk membuat planner
-json FoodPlanning::createPlanner(int id_mahasiswa, string namaMahasiswa, double total_budget, int metode, double sisa_uang, string jenisMakanan, string tipeMakanan, string tipeMinuman)
+json FoodPlanning::createPlanner(string namaMahasiswa, double total_budget, int metode, double sisa_uang, string jenisMakanan, string tipeMakanan, string tipeMinuman)
 {
     json dataJSON;
 
@@ -168,15 +168,16 @@ json FoodPlanning::createPlanner(int id_mahasiswa, string namaMahasiswa, double 
 void FoodPlanning::getFoodPlanner(string &response)
 {
     // get data atau respon dari json
-    json dataJSON = Json::parse(response);
+    json rawJSON = json::parse(response);
+    json dataJSON = json::parse(rawJSON[0]["output"].get<string>());
 
     // masukkan ke rencana keuangan
     auto rk = dataJSON["rencana_keuangan"];
 
     pk.total_budget = rk["total_budget"];
-    pk.saving_rate = rk["saving_rate"];
+    pk.saving_rate = rk["opsi_saving_dipilih"];
     pk.uang_disimpan = rk["nominal_disimpan"];
-    pk.budget_harian = rk["budget_harian_makanan"];
+    pk.budget_harian = rk["budget_harian_makan"];
 
     // digunakan untuk iterasi
     int i = 0;
