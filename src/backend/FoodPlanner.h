@@ -7,7 +7,7 @@
 #include <vector>            // untuk array dinamis
 #include <fstream>           // untuk operasi file
 #include <iostream>          // untuk cin cout d.l.l
-#include <curl/curl.h>       // untuk menangkap api
+#include <curl/curl.h>       // untuk menangkap API
 #include <nlohmann/json.hpp> // untuk json
 #include "ConnectionAPI.h"
 #include <ctime> // untuk menggunakan library waktu
@@ -46,7 +46,7 @@ class FoodPlanning
 private:
     PrediksiMenu pm;
     PrediksiDataKeuangan pk;
-    vector<PrediksiMenu> daftarMenu;
+    vector<PrediksiMenu> daftarMenu; // menggunakan vector untuk array dinamis
 
 public:
     ConnectionAPI api;

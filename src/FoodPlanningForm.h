@@ -7,8 +7,10 @@
 #include <windows.h>
 // deklrasi variabel
 #include <iostream>
-#include <string>
-#include <chrono> // libary yang digunakan untuk waktu, link : https://en.cppreference.com/w/cpp/chrono.html
+#include <string> 
+#include <ctime> // digunakan untuk waktu c++
+#include <iomanip> // digunakan untuk merapikan tampilan c++
+#include "backend/FoodPlanner.h" // koneksi ke bagian backend food planner
 
 using namespace std;
 
@@ -18,7 +20,6 @@ class FoodPlanningForm
 private:
 public:
     // digunakan untuk membuat planner
-    void clearScreen();
     void makePlanner();
     string readPlanner();
     string readDailyExpenses();

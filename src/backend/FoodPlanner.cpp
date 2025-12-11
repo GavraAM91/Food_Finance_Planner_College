@@ -4,7 +4,6 @@
 #include <windows.h>
 
 #include "FoodPlanner.h"
-using json = nlohmann::json;
 
 // method yang digunakan untuk mengakses tanggal =
 string getDay()
@@ -16,7 +15,7 @@ string getDay()
     char buffer[80];
 
     // panggil fungsi bawaan ctime
-    strftime(buffer, 80, "%d-%m-%Y", ltm);
+    strftime(buffer, 801., "%d-%m-%Y", ltm);
 
     return string(buffer);
 }
@@ -61,7 +60,7 @@ void FoodPlanning::dailyExpenses(long long totalPengeluaran, string tanggal, str
     }
     else
     {
-        cout << "Dat ggal dimasukkan!" << endl;
+        cout << "Dat gagal dimasukkan!" << endl;
     }
 }
 
@@ -70,27 +69,61 @@ void FoodPlanning::dailyExpenses(long long totalPengeluaran, string tanggal, str
 void FoodPlanning::getSavedPlanner(string day, string month, string year)
 {
     // check file
+    string inputTanggalUser = day + '-' + month + '-' + year;
     string isiText;
+    bool statusFileDitemukan = false;
 
     // variabel nama file
-    string namaFile = "DataFoodPlannerMahasiswa_";
-    string cariTanggalByUser = day + "-" + month + "-" + year + ".txt";
-    string namaFileTanggal = namaFile + cariTanggalByUser;
+    // digunakan untuk penyimpanan file berdasarkan tanggal atau per minggu
+    // string namaFile = "DataFoodPlannerMahasiswa_";
+    // string cariTanggalByUser = day + "-" + month + "-" + year + ".txt";
+    // string namaFileTanggal = namaFile + cariTanggalByUser;
+
+    // hasil penyimpanan hanya dalam satu file saja
+    string namaFile = "DataFoodPlannerMahasiswa.txt";
 
     // buka file
-    ifstream MyFile(namaFileTanggal);
+    // ifstream MyFile(namaFileTanggal); // digunakan untuk yang function atas
+    ifstream MyFile(namaFile);
 
     if (!MyFile)
     {
+        cout << "File Tidak ditemukan" << endl;
         return;
     }
 
+    // perulangan ini digunakan untuk function file yang dibuat per minggu
+    //  while (getline(MyFile, isiText))
+    //  {
+    //      // if else untuk check tanggal minggu ini :
+    //      cout << isiText;
+    //      system("pause"); // berhenti untuk membaca
+    //      return;
+    //  }
+
+    // perulangan ini digunakan untuk function file yang dibuat dalam satu file saja
     while (getline(MyFile, isiText))
     {
-        // if else untuk check tanggal minggu ini :
-        cout << isiText;
-        system("pause"); // berhenti untuk membaca 
-        return;
+        // logika if else untuk check status dulu
+        if (!statusFileDitemukan)
+        {
+            // apakah tanggal ditemukan ?
+            if (isiText.find(inputTanggalUser) != string::npos)
+            {
+                statusFileDitemukan = true; // ubah jadi true untuk statusnya
+                cout << isiText << endl;    // tampilkan isinya
+            }
+        }
+        else
+        {
+            if (isiText.find("=======BAGIAN AKHIR========") != string::npos)
+            {
+                cout << isiText << endl;
+                break;
+            }
+
+            cout << isiText << endl;
+        }
     }
 
     // tutup file
@@ -128,7 +161,7 @@ json FoodPlanning::createPlanner(int id_mahasiswa, string namaMahasiswa, double 
     return json::parse(response);
 }
 
-// method untuk mengambil data dari json
+// method untuk mengambil data dari json dan menampilkan data ke layar
 void FoodPlanning::getFoodPlanner(string &response)
 {
     // get data atau respon dari json

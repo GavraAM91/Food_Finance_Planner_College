@@ -3,9 +3,22 @@
 #define NOMINMAX
 #include <windows.h>
 
-#include "FoodPlanningForm.h"
-#include "backend/FoodPlanner.h"
-#include <iomanip>
+#include "FoodPlanningForm.h" // header food planning form
+
+// function untuk mendapatkan data tanggal
+string getDay()
+{
+    time_t now = time(0);
+    tm *ltm = localtime(&now);
+
+    // variabel untuk menampung hasil
+    char buffer[80];
+
+    // panggil fungsi bawaan ctime
+    strftime(buffer, 801., "%d-%m-%Y", ltm);
+
+    return string(buffer);
+}
 
 // Method untuk membuat planner
 void FoodPlanningForm::makePlanner()
@@ -29,8 +42,8 @@ void FoodPlanningForm::makePlanner()
         int opsiUser, opsiUser2;
         char pilihanUser;
 
-        // memanggil fungsi clear screen untuk membersihkan data
-        clearScreen();
+        // fungsi untuk membersihkan layar
+        system("cls");
 
         cout << "=============================================" << endl;
         cout << "      FORM PERENCANAAN MAKAN MAHASISWA" << endl;
@@ -229,14 +242,20 @@ string FoodPlanningForm::getPlannerAWeek()
 
     // masukkan ke dalam function getsavedplanner
     fp.getSavedPlanner(day, month, year);
+
+    cout << "Kembali ke program awal " << endl;
 }
 
 // method untuk melihat pengeluaran harian
 string FoodPlanningForm::readDailyExpenses()
 {
+    // buka file
     ifstream MyFile("DailyExpenses.txt");
     if (!MyFile)
-        return "File pengeluaran harian tidak ditemukan.\n";
+    {
+        // return untuk notifikasi
+        cout << "File pengeluaran harian tidak ditemukan." << endl;
+    }
 
     string line, lastBlock = "";
     bool collecting = false;
@@ -268,13 +287,17 @@ string FoodPlanningForm::readDailyExpenses()
 string FoodPlanningForm::createDailyExpenses(int jumlahPengeluaran,
                                              double totalUangYangDikeluarkanHariIni)
 {
+    // variabel untuk menyimpan data tanggal
+    string tanggal = getDay();
+
     ofstream file("DailyExpenses.txt", ios::app);
 
     if (!file)
         return "Gagal membuka file pengeluaran harian!\n";
 
     // header tanggal
-    file << "=============================================\n";
+    file << tanggal << "\n";
+    file << "------------------------------------------------\n";
     file << "Total Pengeluaran Hari Ini : Rp" << totalUangYangDikeluarkanHariIni << "\n";
     file << "Jumlah Item                : " << jumlahPengeluaran << "\n";
     file << "---------------------------------------------\n\n";

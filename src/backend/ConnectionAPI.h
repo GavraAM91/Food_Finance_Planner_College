@@ -6,7 +6,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 
-using Json = nlohmann::json;
+using Json = nlohmann::json; // digunakan untuk memakai class atau library dari nlohman json
 using namespace std;
 
 // class untuk memanggil API URL
