@@ -44,7 +44,7 @@ void FoodPlanningForm::makePlanner()
         char pilihanUser;
 
         // fungsi untuk membersihkan layar
-        system("cls");
+        system("cls"); // cls kepanjangan dari clear screen
 
         cout << "=============================================" << endl;
         cout << "      FORM PERENCANAAN MAKAN MAHASISWA" << endl;
@@ -107,7 +107,7 @@ void FoodPlanningForm::makePlanner()
         cout << left << setw(28) << "Tipe Minuman" << ": ";
         getline(cin, tipeMinuman);
 
-        json result = planner.createPlanner(
+        planner.createPlanner(
             namaMahasiswa,
             total_budget,
             metode,

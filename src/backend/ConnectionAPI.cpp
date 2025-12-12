@@ -24,7 +24,7 @@ bool ConnectionAPI::performCurlRequest(const string &url, string &response)
     {
         return false;
     }
-    
+
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, response); // menangkap respon

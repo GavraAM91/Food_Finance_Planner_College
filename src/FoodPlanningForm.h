@@ -29,7 +29,12 @@ public:
     string readDailyExpenses();                                                                // untuk membcaa pengeluaran hari ini
     string createDailyExpenses(int jumlahPengeluaran, double totalUangYangDikeluarkanHariIni); // untuk membuaat pengeluaaraan hariaan
     string checkAllPlanner();                                                                  // print seluruh plaannner ke screen
-    void getPlannerAWeek();                                                                    // print planner untuk seminggu
+    void getPlannerAWeek();   
+    
+    // print planner untuk seminggu
+
+    // FUNCTION UNTUK MENYIMPAN DATA MAKANAN
+    void createFoodData();
 };
 
 #endif

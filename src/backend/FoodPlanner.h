@@ -31,6 +31,8 @@ struct PrediksiDataKeuangan
 // digunakan untuk menyimpan menu makanan
 struct PrediksiMenu
 {
+    int hari;
+    int waktu;
     int id_makanan;
     int harga;
     int nomor_kantin;

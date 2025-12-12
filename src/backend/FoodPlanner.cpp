@@ -168,30 +168,44 @@ json FoodPlanning::createPlanner(string namaMahasiswa, double total_budget, int 
 void FoodPlanning::getFoodPlanner(string &response)
 {
     // get data atau respon dari json
+
+    // TESTING BY AI
+    // 1. Parse string response mentah ke JSON object
     json rawJSON = json::parse(response);
-    json dataJSON = json::parse(rawJSON[0]["output"].get<string>());
+    json dataJSON;
+
+    // 2. Cek apakah response berupa Array (Format n8n baru)
+    // Format n8n: [ { "status": "success", ... } ]
+    if (rawJSON.is_array() && !rawJSON.empty())
+    {
+        dataJSON = rawJSON[0]; // Ambil item pertama
+    }
+    else
+    {
+        // Fallback jika n8n mengembalikan object langsung
+        dataJSON = rawJSON;
+    }
 
     // masukkan ke rencana keuangan
     auto rk = dataJSON["rencana_keuangan"];
-
-    pk.total_budget = rk["total_budget"];
-    pk.saving_rate = rk["opsi_saving_dipilih"];
-    pk.uang_disimpan = rk["nominal_disimpan"];
-    pk.budget_harian = rk["budget_harian_makan"];
-
-    // digunakan untuk iterasi
-    int i = 0;
+    pk.total_budget = rk.value("total_budget", 0.0);
+    pk.saving_rate = rk.value("opsi_saving_dipilih", 0);
+    pk.uang_disimpan = rk.value("nominal_disimpan", 0.0);
+    pk.budget_harian = rk.value("budget_harian_makan", 0.0);
 
     // masukkan ke planning makanan ( HELPED BY GPT BAGIAN AUTO )
     for (auto &item : dataJSON["prediksi_menu"])
     {
-        pm.id_makanan = item["id_makanan"];
-        pm.harga = item["harga"];
-        pm.nama_makanan = item["nama_makanan"];
-        pm.pemilik_kantin = item["pemilik_kantin"];
-        pm.tipe_makanan = item["tipe_makanan"];
-        pm.nomor_kantin = item["nomor_kantin"];
-        i++;
+        // Gunakan .value() agar aman jika ada field null/hilang
+        pm.hari = item.value("hari", 0);
+        pm.waktu = item.value("waktu", 0);
+        pm.id_makanan = item.value("id_makanan", 0);
+
+        pm.nama_makanan = item.value("nama_makanan", "Tanpa Nama");
+        pm.nomor_kantin = item.value("nomor_kantin", 0);
+        pm.pemilik_kantin = item.value("pemilik_kantin", "-");
+        pm.harga = item.value("harga", 0.0);
+        pm.tipe_makanan = item.value("tipe_makanan", "-");
 
         daftarMenu.push_back(pm);
     }
