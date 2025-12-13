@@ -25,7 +25,7 @@ struct PrediksiDataKeuangan
     double total_budget = 0;
     double budget_harian = 0;
     double uang_disimpan = 0;
-    string saving_rate;
+    int saving_rate;
 };
 
 // digunakan untuk menyimpan menu makanan
@@ -34,8 +34,8 @@ struct PrediksiMenu
     int hari;
     int waktu;
     int id_makanan;
-    int harga;
     int nomor_kantin;
+    string harga;
     string pemilik_kantin;
     string nama_makanan;
     string tipe_makanan;
@@ -59,16 +59,20 @@ public:
     // untuk menggunakan tanggal
     string getDay();
 
-    // untuk menyimpan pengeluaran harian
-    void dailyExpenses(long long totalPengeluaran, string deskripsiPengeluaran);
-
     // mengambil dan menapilkan data planner yang tersimpan di txt
     void getSavedPlanner(string day, string month, string year);
 
     // untuk mengambil food planner
     void getFoodPlanner(string &response);
 
-    void savePlanner(); // untuk menyimpan dalam bentuk file txt
+    // untuk menyimpan dalam bentuk file txt
+    void savePlanner();
+
+    // untuk membaca pengeluaraan harian
+    string readDailyExpenses();
+
+    // untuk menyimpan pengeluaran harian
+    string createDailyExpenses(string deksripsiPengeluaran, double totalUangYangDikeluarkanHariIni);
 
     // request user untuk membuat planner
     json createPlanner(string namaMahasiswa, double total_budget, int metode,

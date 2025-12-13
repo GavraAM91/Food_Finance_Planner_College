@@ -5,22 +5,6 @@
 
 #include "FoodPlanningForm.h" // header food planning form
 
-// ===== DI KOMEN KARENA SUDAH AADA DI FOODPLANNING.CPP ====
-// function untuk mendapatkan data tanggal
-// string getDay()
-// {
-//     time_t now = time(0);
-//     tm *ltm = localtime(&now);
-
-//     // variabel untuk menampung hasil
-//     char buffer[80];
-
-//     // panggil fungsi bawaan ctime
-//     strftime(buffer, 801., "%d-%m-%Y", ltm);
-
-//     return string(buffer);
-// }
-
 // Method untuk membuat planner
 void FoodPlanningForm::makePlanner()
 {
@@ -183,40 +167,6 @@ void FoodPlanningForm::makePlanner()
     }
 }
 
-// string FoodPlanningForm::readPlanner()
-// {
-//     ifstream MyFile("DataFoodPlannerMahasiswa.txt");
-//     if (!MyFile)
-//         return "File planner tidak ditemukan.\n";
-
-//     string line, lastBlock = "";
-//     bool collecting = false;
-
-//     while (getline(MyFile, line))
-//     {
-//         // Jika ketemu tanggal → mulai blok baru
-//         if (line.find("Tanggal :") != string::npos)
-//         {
-//             lastBlock = "";
-//             collecting = true;
-//         }
-
-//         if (collecting)
-//             lastBlock += line + "\n";
-
-//         // blok selesai saat ketemu garis
-//         if (line.find("---------------------------------------------") != string::npos)
-//             collecting = false;
-//     }
-
-//     MyFile.close();
-
-//     if (lastBlock.empty())
-//         return "Tidak ada data planner tersimpan.\n";
-
-//     return lastBlock;
-// }
-
 // method untuk melihat planner yang sudah dibuat untuk minggu ini
 void FoodPlanningForm::getPlannerAWeek()
 {
@@ -244,82 +194,61 @@ void FoodPlanningForm::getPlannerAWeek()
 string FoodPlanningForm::readDailyExpenses()
 {
     // buka file
-    ifstream MyFile("DailyExpenses.txt");
+    // ifstream MyFile("DailyExpenses.txt");
+
+    ifstream MyFile(pathExpenses); // ini sudah sesuai dengan path
+
     if (!MyFile)
     {
         // return untuk notifikasi
         cout << "File pengeluaran harian tidak ditemukan." << endl;
     }
 
-    string line, lastBlock = "";
-    bool collecting = false;
+    // variabel untuk menyimpan text
+    string text;
 
-    while (getline(MyFile, line))
+    while (getline(MyFile, text))
     {
-        if (line.find("Tanggal :") != string::npos)
-        {
-            lastBlock = "";
-            collecting = true;
-        }
-
-        if (collecting)
-            lastBlock += line + "\n";
-
-        if (line.find("---------------------------------------------") != string::npos)
-            collecting = false;
     }
 
+    //    z string line, lastBlock = "";
+    //     bool collecting = false;
+
+    //     while (getline(MyFile, line))
+    //     {
+    //         if (line.find("Tanggal :") != string::npos)
+    //         {
+    //             lastBlock = "";
+    //             collecting = true;
+    //         }
+
+    //         if (collecting)
+    //             lastBlock += line + "\n";
+
+    //         if (line.find("---------------------------------------------") != string::npos)
+    //             collecting = false;
+    //     }
+
     MyFile.close();
-
-    if (lastBlock.empty())
-        return "Belum ada pengeluaran harian.\n";
-
-    return lastBlock;
 }
+
+// method untuk form pengeluaran harian
 
 // method untuk membua pengeluaran harian
-string FoodPlanningForm::createDailyExpenses(int jumlahPengeluaran,
-                                             double totalUangYangDikeluarkanHariIni)
+string FoodPlanningForm::createDailyExpenses(string deskripsiPengeluaran, int jumlahPengeluaran, double totalUangYangDikeluarkanHariIni)
 {
-    // deklarasikan foodplanner
+    // deklarasi variabel dan kelas
     FoodPlanning fp;
 
-    // variabel untuk menyimpan data tanggal
-    string tanggal = fp.getDay();
+    // output user 
+    cout << "===    PENGELUARAN HARI INI    ====" << endl;
+    cout << "Alasan Pengeluaran hari ini : "; 
+    getline(cin, deskripsiPengeluaran);
 
-    ofstream file("DailyExpenses.txt", ios::app);
+    cout << "Jumlah uang yang dikeluarkan  : ";
+    cin >> jumlahPengeluaran;
+    cin.ignore();
 
-    if (!file)
-        return "Gagal membuka file pengeluaran harian!\n";
-
-    // header tanggal
-    file << tanggal << "\n";
-    file << "------------------------------------------------\n";
-    file << "Total Pengeluaran Hari Ini : Rp" << totalUangYangDikeluarkanHariIni << "\n";
-    file << "Jumlah Item                : " << jumlahPengeluaran << "\n";
-    file << "---------------------------------------------\n\n";
-
-    file.close();
-
-    return "Pengeluaran harian berhasil disimpan.\n";
-}
-
-// method untuk melihat seluruh planner
-string FoodPlanningForm::checkAllPlanner()
-{
-    ifstream MyFile("DataFoodPlannerMahasiswa.txt");
-    if (!MyFile)
-        return "File planner tidak ditemukan.\n";
-
-    string line, isi = "";
-
-    while (getline(MyFile, line))
-        isi += line + "\n";
-
-    MyFile.close();
-
-    if (isi.empty())
-        return "Tidak ada data planner tersimpan.\n";
-
-    return isi;
+    //panggil kelas foodPlanning
+    fp.createDailyExpenses(deskripsiPengeluaran, jumlahPengeluaran);
 }

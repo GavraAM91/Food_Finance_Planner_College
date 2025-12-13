@@ -20,56 +20,7 @@ string FoodPlanning::getDay()
     return string(buffer);
 }
 
-// method untuk menyimpan pengeluaran haria
-void FoodPlanning::dailyExpenses(long long totalPengeluaran, string deskripsiPengeluaran)
-{
-    // deklarasi variabel
-    string text;
-    bool status = false; // digunakan untuk status apakah berhasil atau tidak, default false
-
-    // open file
-    // ofstream MyFile("DataFoodPlannerMahasiswa.txt");
-
-    // open file atau create file
-    ofstream MyFile(pathPlanner);
-
-    // error handling
-    if (!MyFile)
-    {
-
-        cout << "File tidak ditemukan!" << endl;
-        return;
-    }
-
-    // panggil method tanggal
-    string tanggal = getDay();
-
-    // memasukkan data dari struct PrediksiDataKeuangan ke file
-    MyFile << tanggal << "\n";
-    MyFile << "===    DATA PENGELUARAN HARI INI   ===\n";
-    MyFile << "Total Pengeluaran            : " << totalPengeluaran << "\n";
-    MyFile << "Tanggal                      : " << tanggal << "\n";
-    MyFile << "Deskripsi Pengeluaran        : " << deskripsiPengeluaran << "\n";
-    MyFile << "--------------------------------------------------\n";
-
-    // change status jadi true
-    status = true;
-
-    // tutup file
-    MyFile.close();
-
-    if (status == true)
-    {
-        cout << "Data berhasil dimasukkan!" << endl;
-    }
-    else
-    {
-        cout << "Dat gagal dimasukkan!" << endl;
-    }
-}
-
 // method untuk check data planner tersimpan berdasarkan tanggal
-// TAHAP PENGEMBANGAN
 void FoodPlanning::getSavedPlanner(string day, string month, string year)
 {
     // check file
@@ -204,7 +155,7 @@ void FoodPlanning::getFoodPlanner(string &response)
         pm.nama_makanan = item.value("nama_makanan", "Tanpa Nama");
         pm.nomor_kantin = item.value("nomor_kantin", 0);
         pm.pemilik_kantin = item.value("pemilik_kantin", "-");
-        pm.harga = item.value("harga", 0.0);
+        pm.harga = item.value("harga", "0");
         pm.tipe_makanan = item.value("tipe_makanan", "-");
 
         daftarMenu.push_back(pm);
@@ -270,12 +221,128 @@ void FoodPlanning::savePlanner()
                << " | Rp" << dataMenu.harga << "\n";
     }
 
+    MyFile << "========BAGIAN_AKHIR========" << "\n";
+
     // tutup file
     MyFile.close();
 
     // pesan konfirmasi
     cout << "Data finance berhasil disimpan " << endl;
 };
+
+// method untuk membaca pengeluaran hari ini
+string FoodPlanning::readDailyExpenses()
+{
+    ifstream MyFile(pathExpenses);
+
+    if (!MyFile)
+    {
+        return "File pengeluaran harian belum dibuat atau tidak ditemukan.\n";
+    }
+
+    string line, blokTerakhir = "";
+    bool sedangMengambil = false;
+
+    // Membaca baris per baris
+    while (getline(MyFile, line))
+    {
+        // Logika: Jika menemukan kata "Tanggal :", berarti data baru dimulai
+        // Kita reset blokTerakhir agar hanya mengambil data yang paling baru
+        if (line.find("Tanggal :") != string::npos)
+        {
+            blokTerakhir = "";
+            sedangMengambil = true;
+        }
+
+        if (sedangMengambil)
+            blokTerakhir += line + "\n";
+
+        // Berhent jika menemukan garis pembatas
+        if (line.find("---------------------------------------------") != string::npos)
+            sedangMengambil = false;
+    }
+
+    MyFile.close();
+
+    if (blokTerakhir.empty())
+        return " [INFO] Belum ada data pengeluaran yang terekam.\n";
+
+    return blokTerakhir;
+};
+
+// method untuk membuat pengeluaran harian ( simpan ke .txt )
+string FoodPlanning::createDailyExpenses(string deskripsiPengeluaaran, double totalUangYangDikeluarkanHariIni)
+{
+    // Mengambil tanggal hari ini dari backend
+    string tanggal = getDay();
+    string text;
+    double totalPengeluaran = 0;
+    // status ditemukan
+    bool statusTanggal = false;
+
+    double totalPengeluaran = 0;
+
+    // membaca file dulu
+    ifstream readFile(pathExpenses);
+
+    // error handling
+    if (!readFile)
+    {
+        return "Gagal membuka file expenses";
+    }
+
+    while (getline(readFile, text))
+    {
+        if (text.find("Tanggal : " + tanggal) != string::npos)
+        {
+            statusTanggal = true;
+            if (text.find("Total pengeluaaran : Rp") != string::npos)
+            {
+                // ambil total pengeluaaran terakhir
+                string angka = text.substr(text.find("Rp") + 2);
+                // jadikan bentuk angka ( double )
+                totalPengeluaran = stod(angka);
+            }
+            break;
+        }
+    }
+    readFile.close(); // tutup file
+
+    // // Membuka file dengan mode append (menambah tanpa menghapus yang lama)
+    ofstream file(pathExpenses, ios::app);
+    // error handling
+    if (!file)
+    {
+        return "Gagal membuka file expenses. Cek 'dataFile/Expenses' sudah ada!\n";
+    }
+
+    if (statusTanggal == false)
+    {
+        // buat baru
+        file << "\n";
+        file << "---------------------------------------------\n";
+        file << "Tanggal : " << tanggal << "\n";
+        file << "---------------------------------------------\n";
+        file << "           FILE PENGELUARAN HARI INI :         \n";
+        file << "---------------------------------------------\n";
+    }
+    else if (statusTanggal == true)
+    {
+        // beri pembatas saja
+        file << "---------------------------------------------\n";
+    }
+
+    // isi file
+    file << "Deskripsi Pengeluaran : " << deskripsiPengeluaaran << "\n";
+    file << "Pengeluaran saat ini  : " << "\n";
+    file << "Total Pengeluaran : Rp " << fixed << setprecision(0) << totalUangYangDikeluarkanHariIni << "\n";
+    file << "\n";
+
+    // tututp file
+    file.close();
+
+    return "Pengeluaran harian berhasil disimpan.\n";
+}
 
 // method untuk upload pengeluaran harian ke database
 // json FoodPlanning
