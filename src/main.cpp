@@ -37,18 +37,7 @@ int main()
         // digunakna untuk membuat pengeluaran hari ini
         case 1:
         {
-            int jumlah;
-            double total;
-
-            cout << "Jumlah item pengeluaran hari ini : ";
-            cin >> jumlah;
-
-            cout << "Total uang yang dikeluarkan hari ini : Rp";
-            cin >> total;
-
-            string hasil = FP.createDailyExpenses(jumlah, total);
-            cout << hasil << endl;
-            system("pause");
+            FP.createDailyExpenses();
             break;
         }
 

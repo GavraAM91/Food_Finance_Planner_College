@@ -230,53 +230,12 @@ void FoodPlanning::savePlanner()
     cout << "Data finance berhasil disimpan " << endl;
 };
 
-// method untuk membaca pengeluaran hari ini
-string FoodPlanning::readDailyExpenses()
-{
-    ifstream MyFile(pathExpenses);
-
-    if (!MyFile)
-    {
-        return "File pengeluaran harian belum dibuat atau tidak ditemukan.\n";
-    }
-
-    string line, blokTerakhir = "";
-    bool sedangMengambil = false;
-
-    // Membaca baris per baris
-    while (getline(MyFile, line))
-    {
-        // Logika: Jika menemukan kata "Tanggal :", berarti data baru dimulai
-        // Kita reset blokTerakhir agar hanya mengambil data yang paling baru
-        if (line.find("Tanggal :") != string::npos)
-        {
-            blokTerakhir = "";
-            sedangMengambil = true;
-        }
-
-        if (sedangMengambil)
-            blokTerakhir += line + "\n";
-
-        // Berhent jika menemukan garis pembatas
-        if (line.find("---------------------------------------------") != string::npos)
-            sedangMengambil = false;
-    }
-
-    MyFile.close();
-
-    if (blokTerakhir.empty())
-        return " [INFO] Belum ada data pengeluaran yang terekam.\n";
-
-    return blokTerakhir;
-};
-
 // method untuk membuat pengeluaran harian ( simpan ke .txt )
 string FoodPlanning::createDailyExpenses(string deskripsiPengeluaaran, double totalUangYangDikeluarkanHariIni)
 {
     // Mengambil tanggal hari ini dari backend
     string tanggal = getDay();
     string text;
-    double totalPengeluaran = 0;
     // status ditemukan
     bool statusTanggal = false;
 
@@ -296,14 +255,15 @@ string FoodPlanning::createDailyExpenses(string deskripsiPengeluaaran, double to
         if (text.find("Tanggal : " + tanggal) != string::npos)
         {
             statusTanggal = true;
-            if (text.find("Total pengeluaaran : Rp") != string::npos)
-            {
-                // ambil total pengeluaaran terakhir
-                string angka = text.substr(text.find("Rp") + 2);
-                // jadikan bentuk angka ( double )
-                totalPengeluaran = stod(angka);
-            }
-            break;
+        }
+
+        // logika untuk mencaari bagian total pengeluaran1
+        if (text.find("Total Pengeluaran : Rp") != string::npos)
+        {
+            // ambil total pengeluaaran terakhir
+            string angka = text.substr(text.find("Rp") + 3);
+            // jadikan bentuk angka ( double )
+            totalPengeluaran = stod(angka);
         }
     }
     readFile.close(); // tutup file
@@ -332,10 +292,13 @@ string FoodPlanning::createDailyExpenses(string deskripsiPengeluaaran, double to
         file << "---------------------------------------------\n";
     }
 
+    // penjumlahan total :
+    totalPengeluaran += totalUangYangDikeluarkanHariIni;
+
     // isi file
     file << "Deskripsi Pengeluaran : " << deskripsiPengeluaaran << "\n";
-    file << "Pengeluaran saat ini  : " << "\n";
-    file << "Total Pengeluaran : Rp " << fixed << setprecision(0) << totalUangYangDikeluarkanHariIni << "\n";
+    file << "Pengeluaran saat ini  : " << totalUangYangDikeluarkanHariIni << "\n";
+    file << "Total Pengeluaran : Rp " << fixed << setprecision(0) << totalPengeluaran << "\n";
     file << "\n";
 
     // tututp file

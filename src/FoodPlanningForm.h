@@ -26,9 +26,9 @@ public:
     // digunakan untuk membuat planner
     void makePlanner();
     // string readPlanner();        // di command atau deactive karena fungsi tidak digunakan                                                              // function untuk membaca planner
-    string readDailyExpenses();                                                                                             // untuk membcaa pengeluaran hari ini
-    string createDailyExpenses(string deskripsiPengeluaran, int jumlahPengeluaran, double totalUangYangDikeluarkanHariIni); // untuk membuaat pengeluaaraan hariaan
-    string checkAllPlanner();                                                                                               // print seluruh plaannner ke screen
+    string readDailyExpenses();   // untuk membcaa pengeluaran hari ini
+    string createDailyExpenses(); // untuk membuaat pengeluaaraan hariaan
+    string checkAllPlanner();     // print seluruh plaannner ke screen
     void getPlannerAWeek();
 
     // print planner untuk seminggu

@@ -190,65 +190,76 @@ void FoodPlanningForm::getPlannerAWeek()
     // return
 }
 
-// method untuk melihat pengeluaran harian
+/// method untuk membaca pengeluaran hari ini
 string FoodPlanningForm::readDailyExpenses()
 {
-    // buka file
-    // ifstream MyFile("DailyExpenses.txt");
+    // deklarasi function foodPlanner
+    FoodPlanning fp;
 
-    ifstream MyFile(pathExpenses); // ini sudah sesuai dengan path
+    // deklarasi variabel
+    string tanggal = fp.getDay();
+    ifstream MyFile(pathExpenses);
 
     if (!MyFile)
     {
-        // return untuk notifikasi
-        cout << "File pengeluaran harian tidak ditemukan." << endl;
+        return "File pengeluaran harian belum dibuat atau tidak ditemukan.\n";
     }
 
-    // variabel untuk menyimpan text
-    string text;
+    string line, blokTerakhir = "";
+    bool sedangMengambil = false;
 
-    while (getline(MyFile, text))
+    // Membaca baris per baris
+    while (getline(MyFile, line))
     {
+        // Logika: Jika menemukan kata "Tanggal :", berarti data baru dimulai
+        // Kita reset blokTerakhir agar hanya mengambil data yang paling baru
+        if (line.find("Tanggal : ") != string::npos)
+        {
+            if (line.find(tanggal) != string::npos)
+            {
+                sedangMengambil = true;
+            }
+            else
+            {
+                sedangMengambil = false;
+            }
+            blokTerakhir = "";
+        }
+
+        if (sedangMengambil)
+        {
+            blokTerakhir += line + "\n";
+        }
     }
-
-    //    z string line, lastBlock = "";
-    //     bool collecting = false;
-
-    //     while (getline(MyFile, line))
-    //     {
-    //         if (line.find("Tanggal :") != string::npos)
-    //         {
-    //             lastBlock = "";
-    //             collecting = true;
-    //         }
-
-    //         if (collecting)
-    //             lastBlock += line + "\n";
-
-    //         if (line.find("---------------------------------------------") != string::npos)
-    //             collecting = false;
-    //     }
 
     MyFile.close();
-}
 
-// method untuk form pengeluaran harian
+    if (blokTerakhir.empty())
+        return " [INFO] Belum ada data pengeluaran yang terekam.\n";
+
+    return blokTerakhir;
+};
 
 // method untuk membua pengeluaran harian
-string FoodPlanningForm::createDailyExpenses(string deskripsiPengeluaran, int jumlahPengeluaran, double totalUangYangDikeluarkanHariIni)
+string FoodPlanningForm::createDailyExpenses()
 {
     // deklarasi variabel dan kelas
     FoodPlanning fp;
+    string deskripsiPengeluaran;
+    double totalUangYangDikeluarkanHariIni;
 
-    // output user 
-    cout << "===    PENGELUARAN HARI INI    ====" << endl;
-    cout << "Alasan Pengeluaran hari ini : "; 
+    // output user
+    cout
+        << "===    PENGELUARAN HARI INI    ====" << endl;
+    cout << "Alasan Pengeluaran hari ini : ";
     getline(cin, deskripsiPengeluaran);
 
     cout << "Jumlah uang yang dikeluarkan  : ";
-    cin >> jumlahPengeluaran;
+    cin >> totalUangYangDikeluarkanHariIni;
     cin.ignore();
 
-    //panggil kelas foodPlanning
-    fp.createDailyExpenses(deskripsiPengeluaran, jumlahPengeluaran);
+    // panggil kelas foodPlanning
+    fp.createDailyExpenses(deskripsiPengeluaran, totalUangYangDikeluarkanHariIni);
+
+    return "berhasil bosq";
 }

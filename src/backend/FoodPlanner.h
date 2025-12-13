@@ -58,7 +58,7 @@ public:
 
     // untuk menggunakan tanggal
     string getDay();
-
+    
     // mengambil dan menapilkan data planner yang tersimpan di txt
     void getSavedPlanner(string day, string month, string year);
 

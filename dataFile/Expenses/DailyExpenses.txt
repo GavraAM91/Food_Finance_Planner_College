@@ -1,0 +1,45 @@
+
+---------------------------------------------
+Tanggal : 13-12-2025
+---------------------------------------------
+           FILE PENGELUARAN HARI INI :         
+---------------------------------------------
+Deskripsi Pengeluaran : Ayam Geprek
+Pengeluaran saat ini  : 15000
+Total Pengeluaran : Rp 0
+
+---------------------------------------------
+Deskripsi Pengeluaran : kopken
+Pengeluaran saat ini  : 12000
+Total Pengeluaran : Rp 0
+
+---------------------------------------------
+Deskripsi Pengeluaran : kopken
+Pengeluaran saat ini  : 15000
+Total Pengeluaran : Rp 0
+
+---------------------------------------------
+Deskripsi Pengeluaran : Ayam Goreng
+Pengeluaran saat ini  : 15000
+Total Pengeluaran : Rp 0
+
+---------------------------------------------
+Deskripsi Pengeluaran : kopken
+Pengeluaran saat ini  : 50000
+Total Pengeluaran : Rp 0
+
+---------------------------------------------
+Deskripsi Pengeluaran : kopken
+Pengeluaran saat ini  : 5000
+Total Pengeluaran : Rp 0
+
+---------------------------------------------
+Deskripsi Pengeluaran : kopken
+Pengeluaran saat ini  : 5000
+Total Pengeluaran : Rp 5000
+
+---------------------------------------------
+Deskripsi Pengeluaran : ayam mamam
+Pengeluaran saat ini  : 10000
+Total Pengeluaran : Rp 15000
+
