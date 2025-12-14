@@ -20,7 +20,9 @@ int main()
     while (true)
     {
         system("cls");
-        cout << "===    TAMPILAN    ===" << endl;
+        cout << "============================================" << endl;
+        cout << "----             FOOD PLANNER            ---" << endl;
+        cout << "============================================" << endl;
         cout << "1. Pengeluaran Hari Ini" << endl;
         cout << "2. Lihat pengeluaran hari ini" << endl;
         cout << "3. Lihat planning minggu ini" << endl;

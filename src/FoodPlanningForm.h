@@ -5,6 +5,7 @@
 #define _HAS_STD_BYTE 0
 
 #include <windows.h>
+
 // deklrasi variabel
 #include <iostream>              // untuk input output d.l.l
 #include <string>                // untuk menggunakan libary dari string
@@ -25,16 +26,9 @@ public:
 
     // digunakan untuk membuat planner
     void makePlanner();
-    // string readPlanner();        // di command atau deactive karena fungsi tidak digunakan                                                              // function untuk membaca planner
     string readDailyExpenses();   // untuk membcaa pengeluaran hari ini
     string createDailyExpenses(); // untuk membuaat pengeluaaraan hariaan
-    string checkAllPlanner();     // print seluruh plaannner ke screen
     void getPlannerAWeek();
-
-    // print planner untuk seminggu
-
-    // FUNCTION UNTUK MENYIMPAN DATA MAKANAN
-    void createFoodData();
 };
 
 #endif

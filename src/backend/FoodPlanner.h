@@ -14,7 +14,6 @@
 
 using json = nlohmann::json;
 using std::string;
-using namespace std::chrono;
 
 // menyimpan data dari JSON
 struct PrediksiDataKeuangan
@@ -70,7 +69,7 @@ public:
     void savePlanner();
 
     // untuk membaca pengeluaraan harian
-    string readDailyExpenses();
+    // string readDailyExpenses();
 
     // untuk menyimpan pengeluaran harian
     string createDailyExpenses(string deksripsiPengeluaran, double totalUangYangDikeluarkanHariIni);
@@ -78,8 +77,5 @@ public:
     // request user untuk membuat planner
     json createPlanner(string namaMahasiswa, double total_budget, int metode,
                        double sisa_uang, string jenisMakanan, string tipeMakanan, string tipeMinuman);
-
-    static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp);
-    bool performCurlRequest(const string &url, string &response);
 };
 #endif

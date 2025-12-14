@@ -84,15 +84,18 @@ void FoodPlanningForm::makePlanner()
         cin.ignore();
 
         // memasukkan jenis makan apa yang dia suka
-        cout << left << setw(28) << "Jenis Makanan" << ": ";
+        cout << endl;
+        cout << left << setw(28) << "Jenis Makanan (ayam, sayur)" << ": ";
         getline(cin, jenisMakanan);
 
         // memasukkan tipe maakanan apa yang dia suka
-        cout << left << setw(28) << "Tipe Makanan" << ": ";
+        cout << endl;
+        cout << left << setw(28) << "Tipe Makanan (berat, ringan)" << ": ";
         getline(cin, tipeMakanan);
 
         // memasukkan tipe minuman apa yang dia suka
-        cout << left << setw(28) << "Tipe Minuman" << ": ";
+        cout << endl;
+        cout << left << setw(28) << "Tipe Minuman (air mineral, manis)" << ": ";
         getline(cin, tipeMinuman);
 
         planner.createPlanner(
@@ -105,6 +108,7 @@ void FoodPlanningForm::makePlanner()
             tipeMinuman);
 
         // response
+        cout << endl;
         cout << " Lihat Response dari response... " << endl;
         system("pause"); // pause untuk melihat respon dari system
 
@@ -112,7 +116,9 @@ void FoodPlanningForm::makePlanner()
         system("cls");
 
         // tampilkan hasil ke user
+        cout << endl;
         cout << "---        DATA PLANNING MAKANAN     ---" << endl;
+        cout << endl;
         // handling error untuk data
         if (!planner.response.empty())
         {
@@ -133,8 +139,10 @@ void FoodPlanningForm::makePlanner()
             // Ambil data hasil response API
             if (!planner.response.empty())
             {
+                system("cls");
                 planner.getFoodPlanner(planner.response); // isi struct pk & daftarMenu
                 planner.savePlanner();                    // menyimpan ke file txt
+                cout << endl;
                 cout << "Planner berhasil disimpan ke DataFoodPlannerMahasiswa.txt! " << endl;
             }
             else
@@ -178,15 +186,26 @@ void FoodPlanningForm::getPlannerAWeek()
     string day, month, year;
     FoodPlanning fp; // deklarasi object class
 
+    // bersihkan layaaar duulu
+    system("cls");
+
+    cout << "---------------------------------------" << endl;
     cout << "===        LIHAT DATA PLANNING     ===" << endl;
-    cout << "Masukkan tanggal planning minggu ini : ";
+    cout << "---------------------------------------" << endl;
+    cout << endl;
+
+    cout << left << setw(25) << "Masukkan tanggal planning minggu ini : ";
     cin >> day;
 
-    cout << "Masukkan Bulan : ";
+    cout << endl;
+    cout << left << setw(10) << "Masukkan Bulan : ";
     cin >> month;
 
-    cout << "Masukkan tahun : ";
+    cout << endl;
+    cout << left << setw(10) << "Masukkan tahun : ";
     cin >> year;
+
+    system("cls");
 
     // masukkan ke dalam function getsavedplanner
     fp.getSavedPlanner(day, month, year);
@@ -211,6 +230,8 @@ string FoodPlanningForm::readDailyExpenses()
 
     string line, blokTerakhir = "";
     bool sedangMengambil = false;
+
+    system("cls");
 
     // Membaca baris per baris
     while (getline(MyFile, line))
@@ -253,11 +274,18 @@ string FoodPlanningForm::createDailyExpenses()
     double totalUangYangDikeluarkanHariIni;
 
     // output user
-    cout
-        << "===    PENGELUARAN HARI INI    ====" << endl;
+    system("cls");
+
+    cout << "---------------------------------------" << endl;
+    cout << "===    PENGELUARAN HARI INI    ====" << endl;
+    cout << "---------------------------------------" << endl;
+
+    cout << endl;
+
     cout << "Alasan Pengeluaran hari ini : ";
     getline(cin, deskripsiPengeluaran);
 
+    cout << endl;
     cout << "Jumlah uang yang dikeluarkan  : ";
     cin >> totalUangYangDikeluarkanHariIni;
     cin.ignore();
@@ -265,5 +293,5 @@ string FoodPlanningForm::createDailyExpenses()
     // panggil kelas foodPlanning
     fp.createDailyExpenses(deskripsiPengeluaran, totalUangYangDikeluarkanHariIni);
 
-    return "berhasil bosq";
+    return "Data berhaasaail";
 }

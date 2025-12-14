@@ -181,7 +181,6 @@ void FoodPlanning::getFoodPlanner(string &response)
     cout << endl;
     cout << "--------------------------------------------------" << endl;
 
-    // cout << "====   Menu minggu ini     ===" << endl;
     // for (auto &pm : daftarMenu)
     // {
     //     cout << "Nama makanan " << pm.nama_makanan
@@ -192,7 +191,17 @@ void FoodPlanning::getFoodPlanner(string &response)
     //          << endl;
     // }
 
-    cout << "===    PREDIKSI DATA MAKANAN  ===\n";
+    cout << "===    PREDIKSI DATA MAKANAN  ===" << endl;
+
+    cout << left
+         << setw(4) << "Nomor"
+         << setw(25) << "Nama Makanan"
+         << setw(10) << "Nomor Kantin"
+         << setw(20) << "Pemilik Kantin"
+         << setw(18) << "Tipe Makanan"
+         << setw(10) << "Harga Makanan"
+         << endl;
+
     for (auto &pm : daftarMenu)
     {
         cout << setw(4) << i++
@@ -200,7 +209,7 @@ void FoodPlanning::getFoodPlanner(string &response)
              << setw(10) << pm.nomor_kantin
              << setw(20) << pm.pemilik_kantin
              << setw(18) << pm.tipe_makanan
-             << setw(10) << pm.tipe_makanan
+             << setw(18) << pm.harga
              << endl;
     }
 
@@ -231,22 +240,22 @@ void FoodPlanning::savePlanner()
     string tanggal = getDay();
 
     // memasukkan data dari struct PrediksiDataKeuangan ke file
-    MyFile << tanggal << "\n";
-    MyFile << "=============================================\n";
-    MyFile << "----        PREDIKSI DATA KEUANGAN       ----\n";
-    MyFile << "=============================================\n";
+    MyFile << tanggal << endl;
+    MyFile << "=============================================" << endl;
+    MyFile << "----        PREDIKSI DATA KEUANGAN       ----" << endl;
+    MyFile << "=============================================" << endl;
 
-    MyFile << "\n";
-    MyFile << "--- RENCANA KEUANGAN ---" << "\n";
-    MyFile << "Total Budget : " << pk.total_budget << "\n";
-    MyFile << "Saving       : " << pk.saving_rate << "\n";
-    MyFile << "Disimpan     : " << pk.uang_disimpan << "\n";
-    MyFile << "Harian Makan : " << pk.budget_harian << "\n\n";
-    MyFile << "\n";
-    MyFile << "--------------------------------------------------\n";
+    MyFile << endl;
+    MyFile << "--- RENCANA KEUANGAN ---" << endl;
+    MyFile << "Total Budget : " << pk.total_budget << endl;
+    MyFile << "Saving       : " << pk.saving_rate << endl;
+    MyFile << "Disimpan     : " << pk.uang_disimpan << endl;
+    MyFile << "Harian Makan : " << pk.budget_harian << endl;
+    MyFile << endl;
+    MyFile << "--------------------------------------------------" << endl;
 
     // gunakan perulagnan for untuk penyimpanan list makanan
-    MyFile << "===    PREDIKSI DATA MAKANAN  ===\n";
+    MyFile << "===    PREDIKSI DATA MAKANAN  ===" << endl;
 
     // set bentuk tabel
     MyFile << left
@@ -256,7 +265,7 @@ void FoodPlanning::savePlanner()
            << setw(20) << "Pemilik Kantin"
            << setw(18) << "Tipe Makanan"
            << setw(10) << "Harga Makanan"
-           << "\n";
+           << endl;
 
     for (auto &dataMenu : daftarMenu)
     {
@@ -266,13 +275,13 @@ void FoodPlanning::savePlanner()
                << setw(10) << dataMenu.nomor_kantin
                << setw(20) << dataMenu.pemilik_kantin
                << setw(18) << dataMenu.tipe_makanan
-               << setw(10) << dataMenu.tipe_makanan
-               << "\n";
+               << setw(10) << dataMenu.harga
+               << endl;
     }
 
-    MyFile << "=============================================\n";
-    MyFile << "----           BAGIAN_AKHIR        ----" << "\n";
-    MyFile << "=============================================\n";
+    MyFile << "=============================================" << endl;
+    MyFile << "----           BAGIAN_AKHIR        ----" << endl;
+    MyFile << "=============================================" << endl;
 
     // tutup file
     MyFile.close();
@@ -330,9 +339,9 @@ string FoodPlanning::createDailyExpenses(string deskripsiPengeluaaran, double to
     if (statusTanggal == false)
     {
         // buat baru
-        file << "\n";
+        file << endl;
         file << "---------------------------------------------\n";
-        file << "Tanggal : " << tanggal << "\n";
+        file << "Tanggal : " << tanggal << endl;
         file << "---------------------------------------------\n";
         file << "           FILE PENGELUARAN HARI INI :         \n";
         file << "---------------------------------------------\n";
@@ -340,30 +349,20 @@ string FoodPlanning::createDailyExpenses(string deskripsiPengeluaaran, double to
     else if (statusTanggal == true)
     {
         // beri pembatas saja
-        file << "---------------------------------------------\n";
+        file << "---------------------------------------------" << endl;
     }
 
     // penjumlahan total :
     totalPengeluaran += totalUangYangDikeluarkanHariIni;
 
     // isi file
-    file << "Deskripsi Pengeluaran : " << deskripsiPengeluaaran << "\n";
-    file << "Pengeluaran saat ini  : " << totalUangYangDikeluarkanHariIni << "\n";
-    file << "Total Pengeluaran : Rp " << fixed << setprecision(0) << totalPengeluaran << "\n";
-    file << "\n";
+    file << "Deskripsi Pengeluaran : " << deskripsiPengeluaaran << endl;
+    file << "Pengeluaran saat ini  : " << totalUangYangDikeluarkanHariIni << endl;
+    file << "Total Pengeluaran : Rp " << fixed << setprecision(0) << totalPengeluaran << endl;
+    file << endl;
 
     // tututp file
     file.close();
 
     return "Pengeluaran harian berhasil disimpan.\n";
-}
-
-// method untuk upload pengeluaran harian ke database
-// json FoodPlanning
-
-// menangkap request dari curl
-size_t FoodPlanning::WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
-{
-    ((string *)userp)->append((char *)contents, size * nmemb);
-    return size * nmemb;
 }

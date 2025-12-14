@@ -22,6 +22,7 @@ bool ConnectionAPI::postJSON(string &jsonData, string *response)
 
     CURL *curl = curl_easy_init();
 
+    // error hnadling
     if (!curl)
     {
         return false;

@@ -29,3 +29,41 @@ Nomor : 19 | Chicken Spicy | 7 | Pak Hadji Kaya | Makanan Berat | Rp12000
 Nomor : 20 | Chicken Teriyaki | 7 | Pak Hadji Kaya | Makanan Berat | Rp12000
 Nomor : 21 | Ayam Chili Padi | 7 | Pak Hadji Kaya | Makanan Berat | Rp12000
 ========BAGIAN_AKHIR========
+15-12-2025
+=============================================
+----        PREDIKSI DATA KEUANGAN       ----
+=============================================
+
+--- RENCANA KEUANGAN ---
+Total Budget : 500000
+Saving       : 10
+Disimpan     : 50000
+Harian Makan : 64285
+
+--------------------------------------------------
+===    PREDIKSI DATA MAKANAN  ===
+NomorNama Makanan             Nomor KantinPemilik Kantin      Tipe Makanan      Harga Makanan
+1   Soto Ayam                1         Pak Suroso          Makanan Berat     Makanan Berat
+2   Ayam Goreng Buk Son      2         Ibu son             Makanan Berat     Makanan Berat
+3   Geprek Original          5         Ibu Ani             Makanan Berat     Makanan Berat
+4   Geprek Bawang            5         Ibu Ani             Makanan Berat     Makanan Berat
+5   Nasi Ayam Geprek         7         Pak Hadji Kaya      Makanan Berat     Makanan Berat
+6   Geprek Sambal Ijo        5         Ibu Ani             Makanan Berat     Makanan Berat
+7   Geprek Nebtai            5         Ibu Ani             Makanan Berat     Makanan Berat
+8   Geprek Matah             5         Ibu Ani             Makanan Berat     Makanan Berat
+9   Ayam Chili Padi          7         Pak Hadji Kaya      Makanan Berat     Makanan Berat
+10  Chicken Katsu            7         Pak Hadji Kaya      Makanan Berat     Makanan Berat
+11  Chicken Spicy            7         Pak Hadji Kaya      Makanan Berat     Makanan Berat
+12  Chicken Barbeque         7         Pak Hadji Kaya      Makanan Berat     Makanan Berat
+13  Ayam Bakar               5         Ibu Ani             Makanan Berat     Makanan Berat
+14  Nasi Campur Ayam Paha    7         Pak Hadji Kaya      Makanan Berat     Makanan Berat
+15  Ayam Sambal Matah        7         Pak Hadji Kaya      Makanan Berat     Makanan Berat
+16  Ayam Kremes              5         Ibu Ani             Makanan Berat     Makanan Berat
+17  Nasi Ayam Rica Rica      7         Pak Hadji Kaya      Makanan Berat     Makanan Berat
+18  Nasi Ayam Kremes         7         Pak Hadji Kaya      Makanan Berat     Makanan Berat
+19  Nasi Campur Ayam Crispy  7         Pak Hadji Kaya      Makanan Berat     Makanan Berat
+20  Geprek Saus Keju         5         Ibu Ani             Makanan Berat     Makanan Berat
+21  Chicken Teriyaki         7         Pak Hadji Kaya      Makanan Berat     Makanan Berat
+=============================================
+----           BAGIAN_AKHIR        ----
+=============================================
