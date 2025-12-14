@@ -34,7 +34,8 @@ struct PrediksiMenu
     int hari;
     int waktu;
     int id_makanan;
-    int nomor_kantin;
+
+    string nomor_kantin;
     string harga;
     string pemilik_kantin;
     string nama_makanan;
@@ -58,7 +59,7 @@ public:
 
     // untuk menggunakan tanggal
     string getDay();
-    
+
     // mengambil dan menapilkan data planner yang tersimpan di txt
     void getSavedPlanner(string day, string month, string year);
 

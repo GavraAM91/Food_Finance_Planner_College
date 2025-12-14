@@ -35,21 +35,25 @@ void FoodPlanningForm::makePlanner()
         cout << "=============================================" << endl;
 
         // input nama mahasiswa
-        cout << left << setw(28) << "Masukkan nama Mahasiswa : ";
+        cout << left << setw(28) << "Masukkan nama Mahasiswa " << left << setw(5) << ": ";
         getline(cin, namaMahasiswa);
 
         // masukkan total budget
-        cout << left << setw(28) << " Masukkan Total Budget : ";
+        cout << left << setw(28) << "Masukkan Total Budget " << left << setw(5) << ": ";
         cin >> total_budget;
         cin.ignore();
 
         // perencanaan
-        cout << left << setw(28) << " Pilih Metode Hemat " << endl;
+        cout << endl;
+        cout << "-------------------------------" << endl;
+        cout << left << setw(28) << "Pilih Metode Hemat : " << endl;
+        cout << "-------------------------------" << endl;
         cout << "1. Boros " << endl;
         cout << "2. Saving 10% " << endl;
         cout << "3. Saving 20% " << endl;
         cout << "4. Saving 30% " << endl;
         cout << "5. Saving 50% " << endl;
+        cout << "-------------------------------" << endl;
         cout << "Masukkan Pilihan ( 1 - 5 ) : ";
         cin >> opsiUser;
 
@@ -119,7 +123,7 @@ void FoodPlanningForm::makePlanner()
         {
             cout << "Data planning makanan tidak tersedia untuk saat ini! " << endl;
         }
-        cout << "-----------------------------------------------------------------------------------------\n";
+
         cout << " " << endl;
         cout << "Apakah ingin menyimpan hasil ini ? ( Y / T )";
         cin >> pilihanUser;
