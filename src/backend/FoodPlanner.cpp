@@ -128,15 +128,18 @@ void FoodPlanning::getFoodPlanner(string &response)
 
     // 2. Cek apakah response berupa Array (Format n8n baru)
     // Format n8n: [ { "status": "success", ... } ]
-    if (rawJSON.is_array() && !rawJSON.empty())
-    {
-        dataJSON = rawJSON[0]; // Ambil item pertama
-    }
-    else
-    {
-        // Fallback jika n8n mengembalikan object langsung
-        dataJSON = rawJSON;
-    }
+    // if (rawJSON.is_array() && !rawJSON.empty())
+    // {
+    //     dataJSON = rawJSON[0]; // Ambil item pertama
+    // }
+    // else
+    // {
+    //     // Fallback jika n8n mengembalikan object langsung
+    //     dataJSON = rawJSON;
+    // }
+
+    // masukkan data daari raw json ke variabel dataJSON
+    dataJSON = rawJSON;
 
     // masukkan ke rencana keuangan
     auto rk = dataJSON["rencana_keuangan"];
@@ -256,6 +259,7 @@ void FoodPlanning::savePlanner()
 
     // gunakan perulagnan for untuk penyimpanan list makanan
     MyFile << "===    PREDIKSI DATA MAKANAN  ===" << endl;
+    MyFile << "--------------------------------------------------" << endl;
 
     // set bentuk tabel
     MyFile << left
