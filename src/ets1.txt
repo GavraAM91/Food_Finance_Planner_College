@@ -1,0 +1,39 @@
+15-12-2025
+=============================================
+----        PREDIKSI DATA KEUANGAN       ----
+=============================================
+
+--- RENCANA KEUANGAN ---
+Total Budget : 500000
+Saving       : 0
+Disimpan     : 0
+Harian Makan : 71428
+
+--------------------------------------------------
+===    PREDIKSI DATA MAKANAN  ===
+--------------------------------------------------
+NomorNama Makanan             Nomor KantinPemilik Kantin      Tipe Makanan      Harga Makanan
+1   Soto Ayam                1         Pak Suroso          Makanan Berat     10000     
+2   Ayam Kremes              5         Ibu Ani             Makanan Berat     12000     
+3   Ayam Sambal Matah        7         Pak Hadji Kaya      Makanan Berat     12000     
+4   Ayam Goreng Buk Son      2         Ibu son             Makanan Berat     10000     
+5   Nasi Ayam Bakar          7         Pak Hadji Kaya      Makanan Berat     12000     
+6   Chicken Katsu            7         Pak Hadji Kaya      Makanan Berat     12000     
+7   Nasi Ayam Rica Rica      7         Pak Hadji Kaya      Makanan Berat     12000     
+8   Chicken Spicy            7         Pak Hadji Kaya      Makanan Berat     12000     
+9   Ayam Bakar               5         Ibu Ani             Makanan Berat     12000     
+10  Nasi Ayam Kremes         7         Pak Hadji Kaya      Makanan Berat     12000     
+11  Ayam Chili Padi          7         Pak Hadji Kaya      Makanan Berat     12000     
+12  Nasi Campur Ayam Paha    7         Pak Hadji Kaya      Makanan Berat     12000     
+13  Soto Ayam                1         Pak Suroso          Makanan Berat     10000     
+14  Chicken Teriyaki         7         Pak Hadji Kaya      Makanan Berat     12000     
+15  Chicken Barbeque         7         Pak Hadji Kaya      Makanan Berat     12000     
+16  Ayam Goreng Buk Son      2         Ibu son             Makanan Berat     10000     
+17  Ayam Kremes              5         Ibu Ani             Makanan Berat     12000     
+18  Nasi Ayam Bakar          7         Pak Hadji Kaya      Makanan Berat     12000     
+19  Ayam Sambal Matah        7         Pak Hadji Kaya      Makanan Berat     12000     
+20  Chicken Katsu            7         Pak Hadji Kaya      Makanan Berat     12000     
+21  Nasi Ayam Rica Rica      7         Pak Hadji Kaya      Makanan Berat     12000     
+=============================================
+----           BAGIAN_AKHIR        ----
+=============================================

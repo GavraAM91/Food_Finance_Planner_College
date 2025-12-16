@@ -26,6 +26,7 @@ public:
 
     // digunakan untuk membuat planner
     void makePlanner();
+    void inputUserPlanner();
     string readDailyExpenses();   // untuk membcaa pengeluaran hari ini
     string createDailyExpenses(); // untuk membuaat pengeluaaraan hariaan
     void getPlannerAWeek();

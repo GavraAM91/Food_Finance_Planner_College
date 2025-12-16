@@ -66,12 +66,16 @@ public:
     void getFoodPlanner(string &response);
 
     // untuk menyimpan dalam bentuk file txt
+    // void savePlanner(string inputFile); // live code
     void savePlanner();
 
+    // user menentukan sendiri file nya
+    // void userPlanner(string namaFile, tring day, string month, string year);
     // untuk membaca pengeluaraan harian
     // string readDailyExpenses();
 
     // untuk menyimpan pengeluaran harian
+    // string createDailyExpenses(string deksripsiPengeluaran, double totalUangYangDikeluarkanHariIni, string inputFile); // LIVE CODE
     string createDailyExpenses(string deksripsiPengeluaran, double totalUangYangDikeluarkanHariIni);
 
     // request user untuk membuat planner

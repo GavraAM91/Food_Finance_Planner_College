@@ -20,6 +20,9 @@ string FoodPlanning::getDay()
     return string(buffer);
 }
 
+// void FoodPlanning::userPlanner(string namaFile, string day, string month, string year) {
+
+// }
 // method untuk check data planner tersimpan berdasarkan tanggal
 void FoodPlanning::getSavedPlanner(string day, string month, string year)
 {
@@ -126,18 +129,6 @@ void FoodPlanning::getFoodPlanner(string &response)
     json rawJSON = json::parse(response);
     json dataJSON;
 
-    // 2. Cek apakah response berupa Array (Format n8n baru)
-    // Format n8n: [ { "status": "success", ... } ]
-    // if (rawJSON.is_array() && !rawJSON.empty())
-    // {
-    //     dataJSON = rawJSON[0]; // Ambil item pertama
-    // }
-    // else
-    // {
-    //     // Fallback jika n8n mengembalikan object langsung
-    //     dataJSON = rawJSON;
-    // }
-
     // masukkan data daari raw json ke variabel dataJSON
     dataJSON = rawJSON;
 
@@ -224,12 +215,18 @@ void FoodPlanning::getFoodPlanner(string &response)
 }
 
 // method untuk simpan data ke .txt
+// void FoodPlanning::savePlanner(string inputFile)
 void FoodPlanning::savePlanner()
 {
     // digunakan untuk iterasi
+
+    // masukkan nama file dalam variable
+    // string inputPathPlanner = inputFile;
+
     int i = 1;
 
     // buka file
+    // ofstream MyFile(inputPathPlanner, ios::app);
     ofstream MyFile(pathPlanner, ios::app);
 
     // handler error
@@ -294,7 +291,89 @@ void FoodPlanning::savePlanner()
     cout << "Data finance berhasil disimpan " << endl;
 };
 
+//LIVE CODE
 // method untuk membuat pengeluaran harian ( simpan ke .txt )
+// string FoodPlanning::createDailyExpenses(string deskripsiPengeluaaran, double totalUangYangDikeluarkanHariIni, string inputFile)
+// {
+//     // Mengambil tanggal hari ini dari backend
+//     string tanggal = getDay();
+//     string text;
+//     // status ditemukan
+//     bool statusTanggal = false;
+
+//     double totalPengeluaran = 0;
+
+//     // pindahkan nma file ke vrible
+//     string inputFileUser = inputFile;
+
+//     // membaca file dulu
+//     // ifstream readFile(pathExpenses);
+//     ofstream readFile(inputFileUser);
+
+//     // error handling
+//     if (!readFile)
+//     {
+//         return "Gagal membuka file expenses";
+//     }
+
+//     // while (getline(readFile, text))
+//     // {
+//     //     if (text.find("Tanggal : " + tanggal) != string::npos)
+//     //     {
+//     //         statusTanggal = true;
+//     //     }
+
+//     //     // logika untuk mencaari bagian total pengeluaran1
+//     //     if (text.find("Total Pengeluaran : Rp") != string::npos)
+//     //     {
+//     //         // ambil total pengeluaaran terakhir
+//     //         string angka = text.substr(text.find("Rp") + 3);
+//     //         // jadikan bentuk angka ( double )
+//     //         totalPengeluaran = stod(angka);
+//     //     }
+//     // }
+//     // readFile.close(); // tutup file
+
+//     // // Membuka file dengan mode append (menambah tanpa menghapus yang lama)
+//     ofstream file(pathExpenses, ios::app);
+//     // error handling
+//     if (!file)
+//     {
+//         return "Gagal membuka file expenses. Cek 'dataFile/Expenses' sudah ada!\n";
+//     }
+
+//     if (statusTanggal == false)
+//     {
+//         // buat baru
+//         file << endl;
+//         file << "---------------------------------------------\n";
+//         file << "Tanggal : " << tanggal << endl;
+//         file << "---------------------------------------------\n";
+//         file << "           FILE PENGELUARAN HARI INI :         \n";
+//         file << "---------------------------------------------\n";
+//     }
+//     else if (statusTanggal == true)
+//     {
+//         // beri pembatas saja
+//         file << "---------------------------------------------" << endl;
+//     }
+
+//     // penjumlahan total :
+//     totalPengeluaran += totalUangYangDikeluarkanHariIni;
+
+//     // isi file
+//     file << "Deskripsi Pengeluaran : " << deskripsiPengeluaaran << endl;
+//     file << "Pengeluaran saat ini  : " << totalUangYangDikeluarkanHariIni << endl;
+//     file << "Total Pengeluaran : Rp " << fixed << setprecision(0) << totalPengeluaran << endl;
+//     file << endl;
+
+//     // tututp file
+//     file.close();
+
+//     return "Pengeluaran harian berhasil disimpan.\n";
+
+// }
+
 string FoodPlanning::createDailyExpenses(string deskripsiPengeluaaran, double totalUangYangDikeluarkanHariIni)
 {
     // Mengambil tanggal hari ini dari backend
@@ -305,8 +384,12 @@ string FoodPlanning::createDailyExpenses(string deskripsiPengeluaaran, double to
 
     double totalPengeluaran = 0;
 
+    // pindahkan nma file ke vrible
+    string inputFileUser = inputFile;
+
     // membaca file dulu
-    ifstream readFile(pathExpenses);
+    // ifstream readFile(pathExpenses);
+    ofstream readFile(inputFileUser);
 
     // error handling
     if (!readFile)
@@ -314,23 +397,23 @@ string FoodPlanning::createDailyExpenses(string deskripsiPengeluaaran, double to
         return "Gagal membuka file expenses";
     }
 
-    while (getline(readFile, text))
-    {
-        if (text.find("Tanggal : " + tanggal) != string::npos)
-        {
-            statusTanggal = true;
-        }
+    // while (getline(readFile, text))
+    // {
+    //     if (text.find("Tanggal : " + tanggal) != string::npos)
+    //     {
+    //         statusTanggal = true;
+    //     }
 
-        // logika untuk mencaari bagian total pengeluaran1
-        if (text.find("Total Pengeluaran : Rp") != string::npos)
-        {
-            // ambil total pengeluaaran terakhir
-            string angka = text.substr(text.find("Rp") + 3);
-            // jadikan bentuk angka ( double )
-            totalPengeluaran = stod(angka);
-        }
-    }
-    readFile.close(); // tutup file
+    //     // logika untuk mencaari bagian total pengeluaran1
+    //     if (text.find("Total Pengeluaran : Rp") != string::npos)
+    //     {
+    //         // ambil total pengeluaaran terakhir
+    //         string angka = text.substr(text.find("Rp") + 3);
+    //         // jadikan bentuk angka ( double )
+    //         totalPengeluaran = stod(angka);
+    //     }
+    // }
+    // readFile.close(); // tutup file
 
     // // Membuka file dengan mode append (menambah tanpa menghapus yang lama)
     ofstream file(pathExpenses, ios::app);

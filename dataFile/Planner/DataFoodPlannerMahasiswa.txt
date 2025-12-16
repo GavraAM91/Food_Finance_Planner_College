@@ -67,3 +67,81 @@ NomorNama Makanan             Nomor KantinPemilik Kantin      Tipe Makanan      
 =============================================
 ----           BAGIAN_AKHIR        ----
 =============================================
+15-12-2025
+=============================================
+----        PREDIKSI DATA KEUANGAN       ----
+=============================================
+
+--- RENCANA KEUANGAN ---
+Total Budget : 400000
+Saving       : 10
+Disimpan     : 40000
+Harian Makan : 51428
+
+--------------------------------------------------
+===    PREDIKSI DATA MAKANAN  ===
+--------------------------------------------------
+NomorNama Makanan             Nomor KantinPemilik Kantin      Tipe Makanan      Harga Makanan
+1   Soto Ayam                1         Pak Suroso          Makanan Berat     10000     
+2   Nasi Ayam Geprek         7         Pak Hadji Kaya      Makanan Berat     11000     
+3   Geprek Original          5         Ibu Ani             Makanan Berat     10000     
+4   Ayam Goreng Buk Son      2         Ibu son             Makanan Berat     10000     
+5   Geprek Sambal Ijo        5         Ibu Ani             Makanan Berat     11000     
+6   Geprek Bawang            5         Ibu Ani             Makanan Berat     11000     
+7   Nasi Campur Ayam Crispy  7         Pak Hadji Kaya      Makanan Berat     12000     
+8   Ayam Bakar               5         Ibu Ani             Makanan Berat     12000     
+9   Chicken Katsu            7         Pak Hadji Kaya      Makanan Berat     12000     
+10  Soto Ayam                1         Pak Suroso          Makanan Berat     10000     
+11  Nasi Ayam Geprek         7         Pak Hadji Kaya      Makanan Berat     11000     
+12  Geprek Original          5         Ibu Ani             Makanan Berat     10000     
+13  Ayam Goreng Buk Son      2         Ibu son             Makanan Berat     10000     
+14  Geprek Sambal Ijo        5         Ibu Ani             Makanan Berat     11000     
+15  Geprek Bawang            5         Ibu Ani             Makanan Berat     11000     
+16  Nasi Campur Ayam Crispy  7         Pak Hadji Kaya      Makanan Berat     12000     
+17  Ayam Bakar               5         Ibu Ani             Makanan Berat     12000     
+18  Chicken Katsu            7         Pak Hadji Kaya      Makanan Berat     12000     
+19  Soto Ayam                1         Pak Suroso          Makanan Berat     10000     
+20  Nasi Ayam Geprek         7         Pak Hadji Kaya      Makanan Berat     11000     
+21  Geprek Original          5         Ibu Ani             Makanan Berat     10000     
+=============================================
+----           BAGIAN_AKHIR        ----
+=============================================
+15-12-2025
+=============================================
+----        PREDIKSI DATA KEUANGAN       ----
+=============================================
+
+--- RENCANA KEUANGAN ---
+Total Budget : 500000
+Saving       : 0
+Disimpan     : 0
+Harian Makan : 71428
+
+--------------------------------------------------
+===    PREDIKSI DATA MAKANAN  ===
+--------------------------------------------------
+NomorNama Makanan             Nomor KantinPemilik Kantin      Tipe Makanan      Harga Makanan
+1   Ayam Goreng Buk Son      2         Ibu son             Makanan Berat     10000     
+2   Nasi Ayam Geprek         7         Pak Hadji Kaya      Makanan Berat     11000     
+3   Ayam Bakar               5         Ibu Ani             Makanan Berat     12000     
+4   Ayam Goreng Buk Son      2         Ibu son             Makanan Berat     10000     
+5   Nasi Ayam Geprek         7         Pak Hadji Kaya      Makanan Berat     11000     
+6   Ayam Bakar               5         Ibu Ani             Makanan Berat     12000     
+7   Ayam Goreng Buk Son      2         Ibu son             Makanan Berat     10000     
+8   Nasi Ayam Geprek         7         Pak Hadji Kaya      Makanan Berat     11000     
+9   Ayam Bakar               5         Ibu Ani             Makanan Berat     12000     
+10  Ayam Goreng Buk Son      2         Ibu son             Makanan Berat     10000     
+11  Nasi Ayam Geprek         7         Pak Hadji Kaya      Makanan Berat     11000     
+12  Ayam Bakar               5         Ibu Ani             Makanan Berat     12000     
+13  Ayam Goreng Buk Son      2         Ibu son             Makanan Berat     10000     
+14  Nasi Ayam Geprek         7         Pak Hadji Kaya      Makanan Berat     11000     
+15  Ayam Bakar               5         Ibu Ani             Makanan Berat     12000     
+16  Ayam Goreng Buk Son      2         Ibu son             Makanan Berat     10000     
+17  Nasi Ayam Geprek         7         Pak Hadji Kaya      Makanan Berat     11000     
+18  Ayam Bakar               5         Ibu Ani             Makanan Berat     12000     
+19  Ayam Goreng Buk Son      2         Ibu son             Makanan Berat     10000     
+20  Nasi Ayam Geprek         7         Pak Hadji Kaya      Makanan Berat     11000     
+21  Ayam Bakar               5         Ibu Ani             Makanan Berat     12000     
+=============================================
+----           BAGIAN_AKHIR        ----
+=============================================

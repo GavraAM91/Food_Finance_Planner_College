@@ -133,15 +133,24 @@ void FoodPlanningForm::makePlanner()
         cout << " " << endl;
         cout << "Apakah ingin menyimpan hasil ini ? ( Y / T )";
         cin >> pilihanUser;
+        cin.ignore();
 
         if (pilihanUser == 'y' || pilihanUser == 'Y')
         {
             // Ambil data hasil response API
             if (!planner.response.empty())
             {
+                // HASIL LIVECODE :
+                // deklraasi variabel
+                // string inputFile;
+
+                // cout << "Masukkan nama file : ";
+                // getline(cin, inputFile);
+
                 system("cls");
                 planner.getFoodPlanner(planner.response); // isi struct pk & daftarMenu
-                planner.savePlanner();                    // menyimpan ke file txt
+                // planner.savePlanner(inputFile);           // menyimpan ke file txt // LIVE CODE 
+                planner.savePlanner();           // menyimpan ke file txt
                 cout << endl;
                 cout << "Planner berhasil disimpan ke DataFoodPlannerMahasiswa.txt! " << endl;
             }
@@ -273,6 +282,8 @@ string FoodPlanningForm::createDailyExpenses()
     string deskripsiPengeluaran;
     double totalUangYangDikeluarkanHariIni;
 
+    string inputFile;
+
     // output user
     system("cls");
 
@@ -290,8 +301,12 @@ string FoodPlanningForm::createDailyExpenses()
     cin >> totalUangYangDikeluarkanHariIni;
     cin.ignore();
 
+    cout << endl;
+    cout << "Nama file yang ingin diinput : ";
+    getline(cin, inputFile);
+
     // panggil kelas foodPlanning
-    fp.createDailyExpenses(deskripsiPengeluaran, totalUangYangDikeluarkanHariIni);
+    fp.createDailyExpenses(deskripsiPengeluaran, totalUangYangDikeluarkanHariIni, inputFile);
 
     return "Data berhaasaail";
 }

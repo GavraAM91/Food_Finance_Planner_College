@@ -44,7 +44,7 @@ Pengeluaran saat ini  : 10000
 Total Pengeluaran : Rp 15000
 
 
----------------------------------------------
+---------------------------------------------   
 Tanggal : 15-12-2025
 ---------------------------------------------
            FILE PENGELUARAN HARI INI :         
@@ -52,4 +52,14 @@ Tanggal : 15-12-2025
 Deskripsi Pengeluaran : AYAM GEPREK
 Pengeluaran saat ini  : 15000
 Total Pengeluaran : Rp 30000
+
+---------------------------------------------
+Deskripsi Pengeluaran : kopken
+Pengeluaran saat ini  : 20000
+Total Pengeluaran : Rp 50000
+
+---------------------------------------------
+Deskripsi Pengeluaran : kopken
+Pengeluaran saat ini  : 15000
+Total Pengeluaran : Rp 65000
 
